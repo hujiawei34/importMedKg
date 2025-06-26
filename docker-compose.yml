@@ -1,0 +1,23 @@
+services:
+  neo4j-pre-inquiry-bone-local:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: neo4j-pre-inquiry-bone-local:latest
+    container_name: neo4j-pre-inquiry-bone-local
+    restart: always
+    user: "7474:7474"
+    environment:
+      - NEO4J_AUTH=neo4j/neo4j@gkry
+      - NEO4J_dbms_memory_pagecache_size=512M
+      - NEO4J_dbms_memory_heap_initial__size=512M
+      - NEO4J_dbms_memory_heap_max__size=1G
+    ports:
+      - "37474:7474"
+      - "37687:7687"
+      - "36362:6362"
+    volumes:
+      - /data/neo4j/bone-local/data:/data
+      - /data/neo4j/bone-local/logs:/logs
+      - /data/neo4j/bone-local/conf:/var/lib/neo4j/conf
+      - /data/neo4j/bone-local/import:/var/lib/neo4j/import
